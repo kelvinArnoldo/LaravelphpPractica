@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Institution extends Model
 {
-    use HasFactory;
+    public function proyectos()
+    {
+        return $this->hasMany(Proyecto::class);
+    }
 }

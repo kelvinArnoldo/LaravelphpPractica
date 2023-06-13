@@ -10,10 +10,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Institución</span>
+                            <span class="card-title">{{ __('Detalles') }} Institución</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('institutions.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('institutions.index') }}"> {{ __('Atras') }}</a>
                         </div>
                     </div>
 

@@ -21,4 +21,4 @@ Route::get('/', function () {
 
 Route::resource('institutions', InstitutionController::class);
 Route::resource('projects', ProjectController::class);
-Route::get('projects/pdf/{id}',[\App\Http\Controllers\ProjectController::class,'getPDF'])->name('projects.report');
+Route::get('projects/report/{id}',[\App\Http\Controllers\ProjectController::class,'getPDF'])->name('report');

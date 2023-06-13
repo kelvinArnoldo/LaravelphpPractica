@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Institution;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use PDF;
 
 /**
  * Class ProjectController
@@ -21,6 +22,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::paginate();
+        
 
         return view('project.index', compact('projects'))
             ->with('i', (request()->input('page', 1) - 1) * $projects->perPage());
@@ -114,13 +116,11 @@ class ProjectController extends Controller
     public function getPDF($id){
        
         $project = Project::find($id);
+        $institutions = Institution::find($project->institution_id);
         $date = Carbon::now();
-
-
        
-        $pdf = PDF::loadView('/project/report', compact('project','date'));
-
+        $pdf = PDF::loadView('project.report', compact('project','date','institutions'));
+        
         return $pdf->stream('report.pdf');
-
     }
 }

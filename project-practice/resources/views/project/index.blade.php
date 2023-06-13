@@ -37,11 +37,7 @@
 										<th>Institución</th>
 										<th>Nombre Proyecto</th>
 										<th>Fuente Fondos</th>
-										<th>Monto Planificado</th>
-										<th>Monto Patrocinado</th>
-										<th>Monto Fondos Propios</th>
-										<th>Activo</th>
-
+																				
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -53,19 +49,15 @@
 											<td>{{ $project->institution_id }}</td>
 											<td>{{ $project->NombreProyecto }}</td>
 											<td>{{ $project->fuenteFondos }}</td>
-											<td>{{ $project->MontoPlanificado }}</td>
-											<td>{{ $project->MontoPatrocinado }}</td>
-											<td>{{ $project->MontoFondosPropios }}</td>
-											<td>{{ $project->activate }}</td>
-
+																						
                                             <td>
                                                 <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('projects.show',$project->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('projects.edit',$project->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('projects.show',$project->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Detalles') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('projects.edit',$project->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                    <a class="btn btn-sm btn-secondary" href="{{ route('projects.report',$proyecto->id) }}"> {{ __('Reporte') }}</a>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Borrar') }}</button>
+                                                    <a class="btn btn-sm btn-secondary" href="{{ route('report',$project->id) }}"> {{ __('Reporte') }}</a>
                                                 </form>
                                             </td>
                                         </tr>

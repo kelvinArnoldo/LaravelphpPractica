@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Institución')
-
+@section('title', 'Proyecto')
 
 @section('content')
     <div class="container-fluid">
@@ -12,11 +11,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Institución') }}
+                                {{ __('Proyecto') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('institutions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('projects.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Crear Nuevo') }}
                                 </a>
                               </div>
@@ -35,29 +34,38 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Nombre</th>
-										<th>Abreviatura</th>
+										<th>Institución</th>
+										<th>Nombre Proyecto</th>
+										<th>Fuente Fondos</th>
+										<th>Monto Planificado</th>
+										<th>Monto Patrocinado</th>
+										<th>Monto Fondos Propios</th>
 										<th>Activo</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($institutions as $institution)
+                                    @foreach ($projects as $project)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $institution->name }}</td>
-											<td>{{ $institution->acronym }}</td>
-											<td>{{ $institution->activate }}</td>
+											<td>{{ $project->institution_id }}</td>
+											<td>{{ $project->NombreProyecto }}</td>
+											<td>{{ $project->fuenteFondos }}</td>
+											<td>{{ $project->MontoPlanificado }}</td>
+											<td>{{ $project->MontoPatrocinado }}</td>
+											<td>{{ $project->MontoFondosPropios }}</td>
+											<td>{{ $project->activate }}</td>
 
                                             <td>
-                                                <form action="{{ route('institutions.destroy',$institution->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('institutions.show',$institution->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('institutions.edit',$institution->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('projects.show',$project->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('projects.edit',$project->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <a class="btn btn-sm btn-secondary" href="{{ route('projects.report',$proyecto->id) }}"> {{ __('Reporte') }}</a>
                                                 </form>
                                             </td>
                                         </tr>
@@ -67,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $institutions->links() !!}
+                {!! $projects->links() !!}
             </div>
         </div>
     </div>

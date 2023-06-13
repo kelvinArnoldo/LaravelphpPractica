@@ -5,44 +5,105 @@ namespace App\Http\Controllers;
 use App\Models\Institution;
 use Illuminate\Http\Request;
 
+/**
+ * Class InstitutionController
+ * @package App\Http\Controllers
+ */
 class InstitutionController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $instituciones = Institution::all();
-        return view('Institution.index', compact('Institution'));
+        $institutions = Institution::paginate();
+
+        return view('institution.index', compact('institutions'))
+            ->with('i', (request()->input('page', 1) - 1) * $institutions->perPage());
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('Institution.create');
+        $institution = new Institution();
+        return view('institution.create', compact('institution'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $institucion = Institution::create($request->all());
-        return redirect()->route('Institution.index');
+        request()->validate(Institution::$rules);
+
+        $institution = Institution::create($request->all());
+
+        return redirect()->route('institutions.index')
+            ->with('success', 'Institution created successfully.');
     }
 
-    public function show(Institution $institucion)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        return view('Institution.show', compact('Institution'));
+        $institution = Institution::find($id);
+
+        return view('institution.show', compact('institution'));
     }
 
-    public function edit(Institucion $institucion)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
-        return view('Institution.edit', compact('Institution'));
+        $institution = Institution::find($id);
+
+        return view('institution.edit', compact('institution'));
     }
 
-    public function update(Request $request, Institution $institucion)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Institution $institution
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Institution $institution)
     {
-        $institucion->update($request->all());
-        return redirect()->route('Institution.index');
+        request()->validate(Institution::$rules);
+
+        $institution->update($request->all());
+
+        return redirect()->route('institutions.index')
+            ->with('success', 'Institution updated successfully');
     }
 
-    public function destroy(Institution $institucion)
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
     {
-        $institucion->delete();
-        return redirect()->route('Institution.index');
+        $institution = Institution::find($id)->delete();
+
+        return redirect()->route('institutions.index')
+            ->with('success', 'Institution deleted successfully');
     }
 }

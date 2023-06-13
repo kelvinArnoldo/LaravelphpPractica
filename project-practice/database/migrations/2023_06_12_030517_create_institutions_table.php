@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name',250);
             $table->string('acronym',250);
-            $table->boolean('activate')->default(1);
+            $table->boolean('activate')->default(true);
             $table->timestamps();
         });
     }

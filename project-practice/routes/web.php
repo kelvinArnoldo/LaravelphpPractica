@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\InstitutionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('institutions', InstitutionController::class);
-
 Route::resource('projects', ProjectController::class);
-
-
+Route::get('projects/pdf/{id}',[\App\Http\Controllers\ProjectController::class,'getPDF'])->name('projects.report');
